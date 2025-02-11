@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+</head>
+<body>
+    <div class="results-container">
+        <h1>Quiz Completed!</h1>
+        <p>✅ General Section Score: {{ general_score }} / 10</p>
+        <p>✅ Technical Section Score: {{ technical_score }} / 10</p>
+        <p>📊 Overall Score: {{ total_score }} / 20 ({{ percentage }}%)</p>
+        <h2>{{ pass_message }}</h2>
+        <a href="{{ url_for('index') }}">Retake the Quiz</a>
+    </div>
+</body>
+</html>

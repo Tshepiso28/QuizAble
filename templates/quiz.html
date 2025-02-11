@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz App</h1>
+        
+        <h2 id="section-title">{{ section }}</h2>
+        <h3 id="question-number">Question {{ question_number }} of {{ total_questions }}</h3> 
+
+        <div id="question-container">
+            <p id="question-text">{{ question['question'] }}</p>
+            <form method="POST" action="{{ url_for('question', question_index=question_number) }}">
+                {% for i in range(question['answers']|length) %}
+                <div>
+                    <input type="radio" id="answer{{ i }}" name="answer" value="{{ i }}" required>
+                    <label for="answer{{ i }}">{{ question['answers'][i] }}</label>
+                </div>
+                {% endfor %}
+                
+                <button type="submit">Next</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
