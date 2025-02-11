@@ -4,47 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuizAble Scoreboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 400px;
-            margin: 50px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .logo {
-            width: 100px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .score-box {
-            font-size: 18px;
-            margin: 10px 0;
-            padding: 10px;
-            background: #e0e0e0;
-            border-radius: 5px;
-        }
-        .retake-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #007BFF;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/css/score.css">
+    
 </head>
 <body>
     <div class="container">
@@ -52,7 +13,20 @@
         <h1>Discover your QuizAble score</h1>
         <div class="score-box">Technical Score: <span id="tech-score">0</span></div>
         <div class="score-box">General Score: <span id="gen-score">0</span></div>
-        <a href="#" class="retake-btn">Retake Quiz</a>
+        <div class="score-box">Overall Score: <span id="overall-score">0</span></div>
+
+        <div class="congratulations" id="congratulations"></div>
+
+        <!-- Retake Quiz button (always visible) -->
+        <div class="button-container">
+            <a href="#" id="retake-btn" class="retake-btn" onclick="retakeQuiz()">Retake Quiz</a>
+        </div>
+
+        <!-- Go back to landing page button -->
+        <div class="button-container">
+            <a href="/templates/quiz.html" class="landing-btn" onclick="goToLandingPage()">Back to Landing Page</a>
+        </div>
     </div>
+    <script src="../static/javascript/score.js"></script>
 </body>
 </html>

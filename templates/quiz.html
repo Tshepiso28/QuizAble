@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="../Static/css/style.css"> <!-- Link to CSS -->
+</head>
+<body>
+
+    <div class="quiz-container">
+        <h1>Quiz App</h1>
+        
+        <!-- Section Indicator -->
+        <h2 id="section-title"></h2>
+
+        <!-- Question Numbering -->
+        <h3 id="question-number"></h3> 
+
+        <div id="question-container">
+            <p id="question-text"></p>
+            <div id="answer-buttons"></div>
+        </div>
+
+        <div class="button-container">
+            <button id="prev-btn" onclick="prevQuestion()" disabled>Previous</button>
+            <button id="next-btn" onclick="nextQuestion()">Next</button>
+            <button id="submit-btn" onclick="submitQuiz()" style="display: none;">Submit</button>
+        </div>
+    </div>
+
+    <script src="../Static/javascript/script.js"></script> <!-- Link to JavaScript -->
+</body>
+</html>
