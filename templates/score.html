@@ -28,11 +28,12 @@
 
         <!-- Buttons -->
         <div class="button-container">
-            <a href="{{ url_for('index') }}" id="retake-btn" class="btn retake-btn">Retake Quiz</a>
+            <a href="{{ url_for('retake_quiz') }}" id="retake-btn" class="btn retake-btn">Retake Quiz</a>
         </div>
         <div class="button-container">
-            <a href="/templates/quiz.html" class="btn landing-btn" onclick="goToLandingPage()">Back to Landing Page</a>
+            <a href="{{ url_for('index') }}" class="landing-btn">Back to Landing Page</a>
         </div>
+        
     </div>
 
     <script src="../static/javascript/score.js"></script>

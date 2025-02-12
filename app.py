@@ -38,38 +38,46 @@ def reset_quiz():
 @app.route('/')
 def index():
     reset_quiz()
-    return redirect(url_for('question'))
+    return render_template('index.html')  # Redirect to landing page
 
 @app.route('/question', methods=['GET', 'POST'])
 def question():
-    # Track current question index
     question_index = session.get('question_index', 0)
+    total_questions = len(questions)
 
-    # Check if we're within bounds
-    if question_index >= len(questions):
+    if question_index >= total_questions:
         return redirect(url_for('results'))
 
     if request.method == 'POST':
-        selected_answer = int(request.form['answer'])
-        # Update score based on question type
-        if question_index < 10:  # First 10 questions are General
+        selected_answer = request.form.get('answer')  # Use .get() to avoid KeyError
+        if selected_answer is None:
+            return redirect(url_for('question'))  # Handle the case where no answer is selected
+
+        selected_answer = int(selected_answer)  # Convert to int
+        
+        # Update the score based on the answer
+        if question_index < 10:  # General questions
             if selected_answer == questions[question_index]['correct']:
                 session['general_score'] += 1
-        else:  # Remaining questions are Technical
+        else:  # Technical questions
             if selected_answer == questions[question_index]['correct']:
                 session['technical_score'] += 1
 
-        # Increment the question index and store it in the session
-        session['question_index'] += 1
-
+        session['question_index'] += 1  # Increment question index
         return redirect(url_for('question'))  # Redirect to next question
 
     section = "General Questions" if question_index < 10 else "Technical Questions"
-    return render_template('quiz.html', 
-                           question=questions[question_index], 
-                           question_number=question_index + 1, 
-                           total_questions=len(questions), 
+    return render_template('quiz.html',
+                           question=questions[question_index],
+                           question_number=question_index + 1,
+                           total_questions=total_questions,
                            section=section)
+
+@app.route('/retake', methods=['GET', 'POST'])
+def retake_quiz():
+    reset_quiz()  # Reset the quiz for a fresh start
+    return redirect(url_for('question'))  # Redirect to the first question
+
 
 @app.route('/results')
 def results():

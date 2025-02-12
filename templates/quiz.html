@@ -15,7 +15,7 @@
 
         <div id="question-container">
             <p id="question-text">{{ question['question'] }}</p>
-            <form method="POST" action="{{ url_for('question', question_index=question_number) }}">
+            <form method="POST" action="{{ url_for('question') }}">
                 {% for i in range(question['answers']|length) %}
                 <div>
                     <input type="radio" id="answer{{ i }}" name="answer" value="{{ i }}" required>
