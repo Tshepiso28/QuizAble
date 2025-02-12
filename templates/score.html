@@ -3,16 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Results</title>
+    <title>QuizAble Scoreboard</title>
+    <link rel="stylesheet" href="../static/css/score.css"> <!-- Ensure your styles are linked properly -->
 </head>
 <body>
-    <div class="results-container">
-        <h1>Quiz Completed!</h1>
-        <p>✅ General Section Score: {{ general_score }} / 10</p>
-        <p>✅ Technical Section Score: {{ technical_score }} / 10</p>
-        <p>📊 Overall Score: {{ total_score }} / 20 ({{ percentage }}%)</p>
-        <h2>{{ pass_message }}</h2>
-        <a href="{{ url_for('index') }}">Retake the Quiz</a>
+    <div class="container">
+        <img src="../static/resources/image.png" alt="QuizAble Logo" class="logo">
+        <h1>Discover your QuizAble score</h1>
+        
+        <!-- General and Technical Scores -->
+        <div class="score-box">Technical Score: <span id="tech-score">{{ technical_score }}</span></div>
+        <div class="score-box">General Score: <span id="gen-score">{{ general_score }}</span></div>
+
+        <!-- Overall Score and Percentage -->
+        <div class="score-box">
+            Overall Score: <span id="overall-score">{{ total_score }}</span> / 20 
+            ({{ percentage }}%)
+        </div>
+
+        <!-- Congratulations message -->
+        <div class="congratulations" id="congratulations">
+            <h2>{{ pass_message }}</h2>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-container">
+            <a href="{{ url_for('index') }}" id="retake-btn" class="btn retake-btn">Retake Quiz</a>
+        </div>
+        <div class="button-container">
+            <a href="/templates/quiz.html" class="btn landing-btn" onclick="goToLandingPage()">Back to Landing Page</a>
+        </div>
     </div>
+
+    <script src="../static/javascript/score.js"></script>
 </body>
 </html>

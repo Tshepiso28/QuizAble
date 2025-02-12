@@ -31,21 +31,26 @@ questions = [
 ]
 
 def reset_quiz():
-    session['responses'] = []
     session['general_score'] = 0
     session['technical_score'] = 0
+    session['question_index'] = 0  # Add question index tracking
 
 @app.route('/')
 def index():
     reset_quiz()
-    return redirect(url_for('question', question_index=0))
+    return redirect(url_for('question'))
 
-@app.route('/question/<int:question_index>', methods=['GET', 'POST'])
-def question(question_index):
+@app.route('/question', methods=['GET', 'POST'])
+def question():
+    # Track current question index
+    question_index = session.get('question_index', 0)
+
+    # Check if we're within bounds
+    if question_index >= len(questions):
+        return redirect(url_for('results'))
+
     if request.method == 'POST':
         selected_answer = int(request.form['answer'])
-        session['responses'].append(selected_answer)
-
         # Update score based on question type
         if question_index < 10:  # First 10 questions are General
             if selected_answer == questions[question_index]['correct']:
@@ -54,13 +59,17 @@ def question(question_index):
             if selected_answer == questions[question_index]['correct']:
                 session['technical_score'] += 1
 
-        if question_index == len(questions) - 1:
-            return redirect(url_for('results'))
+        # Increment the question index and store it in the session
+        session['question_index'] += 1
 
-        return redirect(url_for('question', question_index=question_index + 1))
+        return redirect(url_for('question'))  # Redirect to next question
 
     section = "General Questions" if question_index < 10 else "Technical Questions"
-    return render_template('quiz.html', question=questions[question_index], question_number=question_index + 1, total_questions=len(questions), section=section)
+    return render_template('quiz.html', 
+                           question=questions[question_index], 
+                           question_number=question_index + 1, 
+                           total_questions=len(questions), 
+                           section=section)
 
 @app.route('/results')
 def results():
