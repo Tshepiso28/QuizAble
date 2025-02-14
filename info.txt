@@ -6,15 +6,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>QuizAble</title>
 </head>
+
 <body>
-    <div class="container">
-        <header>
+    <nav>
+        <div class="nav-div">
             <img src="{{ url_for('static', filename='resources/image.png') }}" alt="Logo" class="logo">
             <h3>Welcome to QuizAble</h3>
-        </header>
+        </div>
+
+    </nav>
+    <div class="container">
+
         <div class="form-container">
-            <h2>Enter Your Details To Get Started!</h2>
-            <form action="{{ url_for('question') }}" method="POST">
+            <form class="form-home" action="{{ url_for('question') }}" method="POST">
+                <h2>Enter Your Details To Get Started!</h2>
                 <input type="text" placeholder="First Name" name="first_name" required>
                 <input type="text" placeholder="Last Name" name="last_name" required>
                 <button type="submit">Start Quiz</button>

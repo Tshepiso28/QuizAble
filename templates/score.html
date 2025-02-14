@@ -4,35 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuizAble Scoreboard</title>
-    <link rel="stylesheet" href="../static/css/score.css"> <!-- Ensure your styles are linked properly -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/score.css') }}"> 
 </head>
 <body>
+    <nav>
+        <div class="nav-div">
+            <img src="{{ url_for('static', filename='resources/image.png') }}" alt="Logo" class="logo">
+            <h3>QuizAble</h3>
+        </div>
+    </nav>
+
     <div class="container">
-        <img src="../static/resources/image.png" alt="QuizAble Logo" class="logo">
         <h1>Discover your QuizAble score</h1>
         
-        <!-- General and Technical Scores -->
         <div class="score-box">Technical Score: <span id="tech-score">{{ technical_score }}</span></div>
         <div class="score-box">General Score: <span id="gen-score">{{ general_score }}</span></div>
 
-        <!-- Overall Score and Percentage -->
         <div class="score-box">
             Overall Score: <span id="overall-score">{{ total_score }}</span> / 20 
             ({{ percentage }}%)
         </div>
 
-        <!-- Congratulations message -->
         <div class="congratulations" id="congratulations">
             <h2>{{ pass_message }}</h2>
         </div>
+        <div class="btn-div">
+            <div class="button-container">
+                <button><a href="{{ url_for('retake_quiz') }}" id="retake-btn" class="btn retake-btn">Retake Quiz</a></button>
+            </div>
+            <div class="button-container">
+                <button><a href="{{ url_for('index') }}" class="landing-btn">Home</a></button>
+            </div>            
+        </div>
 
-        <!-- Buttons -->
-        <div class="button-container">
-            <a href="{{ url_for('retake_quiz') }}" id="retake-btn" class="btn retake-btn">Retake Quiz</a>
-        </div>
-        <div class="button-container">
-            <a href="{{ url_for('index') }}" class="landing-btn">Back to Landing Page</a>
-        </div>
         
     </div>
 

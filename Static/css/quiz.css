@@ -16,11 +16,50 @@ nav{
     background-color: #1a4480;
     width: 100%;
 }
+nav h3{
+    color: #18cb96;
+}
+.nav-div{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
 img{
-    width: 80px;
-    height: 80px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
-    margin: 5px;
+    margin: 0.5%;
+}
+.quiz-container{
+    margin-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+
+}
+.quiz-name{
+    display: flex;
+    justify-content: start;
+    color: #18cb96;
+}
+/* #question-text{
+    background-color: blue;
+} */
+
+/* .form-quiz{
+
+
+} */
+
+.quiz-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
@@ -52,17 +91,17 @@ header {
     color: #1a4480;
 }
 
-form input {
+/* form input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-}
+} */
 
 form button {
-    width: 50%;
+    width: 100px;
     padding: 12px;
     background: #18cb96;
     color: white;
