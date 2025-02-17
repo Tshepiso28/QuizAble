@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Required for session management
+app.secret_key = 'your_secret_key'  
 
-# List of quiz questions (General + Technical)
 questions = [
     # General Questions
     { "question": "Can you work well in a team?", "answers": ["Yes", "No"], "correct": 0 },
@@ -33,12 +32,12 @@ questions = [
 def reset_quiz():
     session['general_score'] = 0
     session['technical_score'] = 0
-    session['question_index'] = 0  # Add question index tracking
+    session['question_index'] = 0  
 
 @app.route('/')
 def index():
     reset_quiz()
-    return render_template('index.html')  # Redirect to landing page
+    return render_template('index.html')  
 
 @app.route('/question', methods=['GET', 'POST'])
 def question():
@@ -49,22 +48,22 @@ def question():
         return redirect(url_for('results'))
 
     if request.method == 'POST':
-        selected_answer = request.form.get('answer')  # Use .get() to avoid KeyError
+        selected_answer = request.form.get('answer')  
         if selected_answer is None:
-            return redirect(url_for('question'))  # Handle the case where no answer is selected
+            return redirect(url_for('question'))  
 
-        selected_answer = int(selected_answer)  # Convert to int
+        selected_answer = int(selected_answer)  
         
-        # Update the score based on the answer
-        if question_index < 10:  # General questions
+        
+        if question_index < 10:  
             if selected_answer == questions[question_index]['correct']:
                 session['general_score'] += 1
-        else:  # Technical questions
+        else:  
             if selected_answer == questions[question_index]['correct']:
                 session['technical_score'] += 1
 
-        session['question_index'] += 1  # Increment question index
-        return redirect(url_for('question'))  # Redirect to next question
+        session['question_index'] += 1  
+        return redirect(url_for('question'))  
 
     section = "General Questions" if question_index < 10 else "Technical Questions"
     return render_template('quiz.html',
@@ -75,8 +74,8 @@ def question():
 
 @app.route('/retake', methods=['GET', 'POST'])
 def retake_quiz():
-    reset_quiz()  # Reset the quiz for a fresh start
-    return redirect(url_for('question'))  # Redirect to the first question
+    reset_quiz()  
+    return redirect(url_for('question'))  
 
 
 @app.route('/results')
